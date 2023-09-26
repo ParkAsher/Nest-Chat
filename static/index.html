@@ -1,11 +1,45 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nest Chat</title>
-  </head>
-  <body>
-    <div id="chat">Nest Chat</div>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Simple Nest Chat</title>
+    </head>
+    <body>
+        <h2>Simple Nest Chat</h2>
+
+        <!-- 채팅 영역 -->
+        <div id="chat"></div>
+
+        <!-- 글 입력 영역 -->
+        <input type="text" id="message" placeholder="메시지를 입력해주세요." />
+        <button onclick="sendMessage()">전송</button>
+    </body>
 </html>
+
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.1.slim.js"></script>
+
+<!-- socket.io 클라이언트 로드 -->
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+<script>
+    // socket.io 인스턴스 생성
+    const socket = io('http://localhost:3000');
+
+    // 서버 접속 확인을 위한 이벤트
+    socket.on('connect', () => {
+        console.log('connected');
+    });
+
+    // [전송] 버튼 클릭 시 입력된 글을 message 이벤트로 보냄
+    function sendMessage() {
+        const message = $('#message').val();
+        socket.emit('message', message);
+    }
+
+    // 서버에서 message 이벤트 발생 시 처리
+    socket.on('message', (message) => {
+        $('#chat').append(`<div>${message}</div>`);
+    });
+</script>
