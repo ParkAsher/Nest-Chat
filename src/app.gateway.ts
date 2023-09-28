@@ -7,7 +7,7 @@ import {
 
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway() // 웹소켓 서버 설정 데코레이터
+@WebSocketGateway({ namespace: 'chat' }) // 웹소켓 서버 설정 데코레이터
 export class ChatGateway {
     // 웹소켓 서버 인스턴스 선언
     @WebSocketServer() server: Server;
