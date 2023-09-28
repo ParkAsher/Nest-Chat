@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,12 +8,19 @@
     <body>
         <h2>Simple Nest Chat</h2>
 
+        <!-- 채팅방 목록 -->
+        <div>
+            <h2>채팅방 목록</h2>
+            <ul id="rooms"></ul>
+        </div>
+
         <!-- 채팅 영역 -->
         <div id="chat"></div>
 
         <!-- 글 입력 영역 -->
         <input type="text" id="message" placeholder="메시지를 입력해주세요." />
         <button onclick="sendMessage()">전송</button>
+        <button onclick="createRoom()">채팅방 만들기</button>
     </body>
 </html>
 
